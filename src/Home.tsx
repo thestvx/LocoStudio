@@ -1,6 +1,7 @@
 import styles from "./styles.module.css"
 import States from "./States"
 import RevealWatcher from "./RevealWatcher"
+import ParallaxWatcher from "./ParallaxWatcher"
 import { SvgGraphic } from "./RichText"
 import Logo from "./Logo"
 import MenuLink from "./MenuLink"
@@ -32,6 +33,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
   return (
     <>
       <RevealWatcher />
+      <ParallaxWatcher />
       <div className={styles["div-30"]}>
         <div className={styles["div-31"]}>
           <div className={styles["div-32"]}>
@@ -51,7 +53,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                       <MenuLink2 slots={["About"]} />
                     </div>
                     <div className={styles["div-40"]}>
-                      <MenuLink slots={["Contact"]} />
+                      <MenuLink slots={["Contact"]} to="/contact" />
                     </div>
                   </div>
                 </div>
@@ -64,7 +66,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                 <div className={styles["top"]}>
                   <div className={styles["div-32"]}>
                     <div className={styles["image"]}>
-                      <div className={styles["div-42"]}>
+                      <div className={styles["div-42"]} data-parallax>
                         <img className={styles["img-2"]} src={slots[0] ?? "https://framerusercontent.com/images/8QG3eDL1pIj26ODvocgA6tJwX8.png?scale-down-to=1024&width=736&height=1308"} alt="" />
                       </div>
                     </div>
@@ -479,7 +481,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-1"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-55"]}>
-                        <a className={styles["project-1-2"]} href="./projects/volta-studio">
+                        <a className={styles["project-1-2"]} href="/projects/volta-studio">
                           <div className={styles["top-2"]}>
                             <div className={styles["div-56"] + " " + styles["rv-4"]} data-reveal style={{ transitionDelay: "358ms" }}>
                               <div className={styles["div-57"]}>
@@ -502,7 +504,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-2"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-60"]}>
-                        <a className={styles["project-1-3"]} href="./projects/sonikk">
+                        <a className={styles["project-1-3"]} href="/projects/sonikk">
                           <div className={styles["top-3"]}>
                             <div className={styles["div-61"] + " " + styles["rv-4"]} data-reveal style={{ transitionDelay: "930ms" }}>
                               <div className={styles["div-62"]}>
@@ -525,7 +527,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-3"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-64"]}>
-                        <a className={styles["project-1-4"]} href="./projects/aura">
+                        <a className={styles["project-1-4"]} href="/projects/aura">
                           <div className={styles["top-4"]}>
                             <div className={styles["div-65"] + " " + styles["rv-4"]} data-reveal>
                               <div className={styles["div-66"]}>
@@ -548,7 +550,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-4"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-68"]}>
-                        <a className={styles["project-1-5"]} href="./projects/norde">
+                        <a className={styles["project-1-5"]} href="/projects/norde">
                           <div className={styles["top-5"]}>
                             <div className={styles["div-69"] + " " + styles["rv-4"]} data-reveal>
                               <div className={styles["div-70"]}>
@@ -571,7 +573,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-5"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-72"]}>
-                        <a className={styles["project-1-6"]} href="./projects/aeromatch">
+                        <a className={styles["project-1-6"]} href="/projects/aeromatch">
                           <div className={styles["top-6"]}>
                             <div className={styles["div-73"] + " " + styles["rv-4"]} data-reveal>
                               <div className={styles["div-74"]}>
@@ -594,7 +596,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                   <div className={styles["project-6"]}>
                     <div className={styles["div-32"]}>
                       <div className={styles["div-76"]}>
-                        <a className={styles["project-1-7"]} href="./projects/aeromatch™-copy">
+                        <a className={styles["project-1-7"]} href="/projects/maison-forel">
                           <div className={styles["top-7"]}>
                             <div className={styles["div-77"] + " " + styles["rv-4"]} data-reveal>
                               <div className={styles["div-78"]}>
@@ -934,7 +936,7 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                         <MenuLink slots={["Projects"]} />
                       </div>
                       <div className={styles["div-40"]}>
-                        <MenuLink slots={["Contact"]} />
+                        <MenuLink slots={["Contact"]} to="/contact" />
                       </div>
                     </div>
                   </div>
@@ -992,3 +994,4 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
     </>
   )
 }
+

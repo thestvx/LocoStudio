@@ -50,7 +50,7 @@ export default function Contact({ slots = [] }: { slots?: string[] }) {
                       <MenuLink2 slots={["About"]} />
                     </div>
                     <div className={styles["div-40"]}>
-                      <MenuLink slots={["Contact"]} />
+                      <MenuLink slots={["Contact"]} to="/contact" />
                     </div>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function Contact({ slots = [] }: { slots?: string[] }) {
                         <MenuLink slots={["Projects"]} />
                       </div>
                       <div className={styles["div-40"]}>
-                        <MenuLink slots={["Contact"]} />
+                        <MenuLink slots={["Contact"]} to="/contact" />
                       </div>
                     </div>
                   </div>

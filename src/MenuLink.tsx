@@ -1,8 +1,8 @@
 import styles from "./styles.module.css"
 
-export default function MenuLink({ slots = [] }: { slots?: string[] }) {
+export default function MenuLink({ slots = [], to = "/projects" }: { slots?: string[]; to?: string }) {
   return (
-      <a className={styles["white"]} href="./projects">
+      <a className={styles["white"]} href={to}>
         <div className={styles["text-1"]}>
           <p className={styles["p-2"]}>{slots[0] ?? "Projects"}</p>
         </div>
