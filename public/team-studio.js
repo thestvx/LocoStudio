@@ -6,6 +6,7 @@
 
   var wasHome = null;
   var namesAnimated = false;
+  var entranceAnimated = false;
   var introEntered = false;
   var splitDone = false;
 
@@ -106,6 +107,52 @@
     });
   }
 
+  function animateEntrance() {
+    if (entranceAnimated) return;
+    entranceAnimated = true;
+
+    var logo = overlay.querySelector(".team-logo");
+    var nav = overlay.querySelector(".team-nav");
+    var descriptions = overlay.querySelectorAll(".profile-desc");
+    var footerLabels = document.querySelectorAll("#team-footer span");
+
+    if (logo) {
+      spring(23, 0, { stiffness: 300, damping: 60, mass: 1, delay: 1000, delta: 0.02 }, function (value) {
+        logo.style.setProperty("--logo-y", value.toFixed(2) + "px");
+      });
+      spring(0.001, 1, { stiffness: 300, damping: 60, mass: 1, delay: 1000, delta: 0.0005 }, function (value) {
+        logo.style.opacity = String(value);
+      });
+    }
+
+    if (nav) {
+      spring(-90, 0, { stiffness: 300, damping: 60, mass: 1, delay: 1000, delta: 0.02 }, function (value) {
+        nav.style.setProperty("--nav-y", value.toFixed(2) + "px");
+      });
+      spring(0.001, 1, { stiffness: 300, damping: 60, mass: 1, delay: 1000, delta: 0.0005 }, function (value) {
+        nav.style.opacity = String(value);
+      });
+    }
+
+    Array.prototype.forEach.call(descriptions, function (element) {
+      spring(90, 0, { stiffness: 300, damping: 60, mass: 1, delay: 1100, delta: 0.02 }, function (value) {
+        element.style.setProperty("--desc-y", value.toFixed(2) + "px");
+      });
+      spring(0.001, 1, { stiffness: 300, damping: 60, mass: 1, delay: 1100, delta: 0.0005 }, function (value) {
+        element.style.opacity = String(value);
+      });
+    });
+
+    Array.prototype.forEach.call(footerLabels, function (element) {
+      spring(20, 0, { stiffness: 400, damping: 80, mass: 1, delay: 500, delta: 0.02 }, function (value) {
+        element.style.setProperty("--footer-y", value.toFixed(2) + "px");
+      });
+      spring(0.001, 1, { stiffness: 400, damping: 80, mass: 1, delay: 500, delta: 0.0005 }, function (value) {
+        element.style.opacity = String(value);
+      });
+    });
+  }
+
   function introEnter() {
     if (introEntered) return;
     introEntered = true;
@@ -128,11 +175,30 @@
 
   function resetAnimations() {
     namesAnimated = false;
+    entranceAnimated = false;
     introEntered = false;
     Array.prototype.forEach.call(overlay.querySelectorAll(".name-spring"), function (element) {
       element.style.opacity = "0.001";
       element.style.setProperty("--spring-y", "90px");
       element.style.setProperty("--parallax-y", "0px");
+    });
+    var logo = overlay.querySelector(".team-logo");
+    var nav = overlay.querySelector(".team-nav");
+    if (logo) {
+      logo.style.opacity = "0.001";
+      logo.style.setProperty("--logo-y", "23px");
+    }
+    if (nav) {
+      nav.style.opacity = "0.001";
+      nav.style.setProperty("--nav-y", "-90px");
+    }
+    Array.prototype.forEach.call(overlay.querySelectorAll(".profile-desc"), function (element) {
+      element.style.opacity = "0.001";
+      element.style.setProperty("--desc-y", "90px");
+    });
+    Array.prototype.forEach.call(document.querySelectorAll("#team-footer span"), function (element) {
+      element.style.opacity = "0.001";
+      element.style.setProperty("--footer-y", "20px");
     });
     var label = intro.querySelector(".intro-label");
     var reveal = intro.querySelector(".intro-reveal");
@@ -225,6 +291,7 @@
         splitIntro();
         fitNames();
         setTimeout(centerTrack, 80);
+        animateEntrance();
         animateNames();
       } else {
         resetAnimations();

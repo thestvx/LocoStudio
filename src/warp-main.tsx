@@ -59,7 +59,7 @@ const syncSmoothScroll = () => {
   const foreignSmooth = document.documentElement.classList.contains('lenis') && !lenis
 
   if (active && !lenis && !foreignSmooth) {
-    lenis = new Lenis({ duration: 1 })
+    lenis = new Lenis({ duration: 1.6 })
     rafId = requestAnimationFrame(runRaf)
   }
 
