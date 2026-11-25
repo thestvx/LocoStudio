@@ -1,5 +1,5 @@
-html.team-hero-active #main section[data-framer-name="Hero"],
-html.team-hero-active #main section#About[data-framer-name="Intro"] {
+html.team-hero-active #main,
+html.team-hero-active #template-overlay {
   display: none !important;
 }
 
@@ -42,11 +42,20 @@ html.team-hero-active #main section#About[data-framer-name="Intro"] {
 
 .team-nav {
   display: flex;
-  gap: 36px;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 28px;
   padding-top: 11px;
 }
 
 .team-nav a {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  white-space: nowrap;
+  line-height: 1;
   font-family: Switzer, "Switzer Placeholder", sans-serif;
   font-size: 17px;
   font-weight: 500;
@@ -173,20 +182,24 @@ html.team-hero-active #main section#About[data-framer-name="Intro"] {
   font-size: clamp(15px, 1.35vw, 19px);
 }
 
-.team-bottom {
-  position: absolute;
-  left: 23px;
-  right: 23px;
-  bottom: 18px;
-  z-index: 4;
-  display: flex;
+#team-footer {
+  position: relative;
+  z-index: 10;
+  display: none;
+  align-items: center;
   justify-content: space-between;
+  width: 100%;
+  padding: 23px 23px 18px;
+  background: #000;
+  color: #f0f0f0;
   font-family: "Chivo Mono", monospace;
   font-size: 16px;
   font-weight: 300;
   letter-spacing: -0.64px;
-  color: #f0f0f0;
-  pointer-events: none;
+}
+
+html.team-hero-active #team-footer {
+  display: flex;
 }
 
 #team-intro {
@@ -259,6 +272,10 @@ html.team-hero-active #main section#About[data-framer-name="Intro"] {
 }
 
 @media (min-width: 810px) and (max-width: 1199.98px) {
+  .team-nav {
+    gap: 20px;
+  }
+
   .team-stage {
     --slot: min(42vh, 380px);
     padding: 0 24px;
@@ -307,7 +324,7 @@ html.team-hero-active #main section#About[data-framer-name="Intro"] {
   }
 
   .team-nav {
-    gap: 14px;
+    gap: 18px;
     padding-top: 8px;
   }
 
@@ -383,10 +400,8 @@ html.team-hero-active #main section#About[data-framer-name="Intro"] {
     font-size: 14px;
   }
 
-  .team-bottom {
-    left: 16px;
-    right: 16px;
-    bottom: 14px;
+  #team-footer {
+    padding: 16px 16px 14px;
     font-size: 12px;
   }
 
