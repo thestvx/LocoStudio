@@ -1,7 +1,6 @@
 import styles from "./styles.module.css"
 import States from "./States"
 import RevealWatcher from "./RevealWatcher"
-import ParallaxWatcher from "./ParallaxWatcher"
 import { SvgGraphic } from "./RichText"
 import Logo from "./Logo"
 import MenuLink from "./MenuLink"
@@ -33,7 +32,6 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
   return (
     <>
       <RevealWatcher />
-      <ParallaxWatcher />
       <div className={styles["div-30"]}>
         <div className={styles["div-31"]}>
           <div className={styles["div-32"]}>
@@ -66,33 +64,33 @@ export default function Home({ slots = [] }: { slots?: string[] }) {
                 <div className={styles["top"]}>
                   <div className={styles["div-32"]}>
                     <div className={styles["image"]}>
-                      <div className={styles["div-42"]} data-parallax>
+                      <div className={styles["div-42"] + " " + styles["rv-4"]} data-reveal>
                         <img className={styles["img-2"]} src={slots[0] ?? "https://framerusercontent.com/images/8QG3eDL1pIj26ODvocgA6tJwX8.png?scale-down-to=1024&width=736&height=1308"} alt="" />
                       </div>
                     </div>
                   </div>
                   <div className={styles["name"]}>
                     <div className={styles["div-32"]}>
-                      <div className={styles["div-43"]}>
+                      <div className={styles["div-43"] + " " + styles["rv-1"]} data-reveal>
                         <p className={styles["p-22"]}>{slots[1] ?? "Julian"}</p>
                       </div>
                     </div>
                     <div className={styles["div-32"]}>
-                      <div className={styles["div-44"]}>
+                      <div className={styles["div-44"] + " " + styles["rv-1"]} data-reveal>
                         <p className={styles["p-22"]}>{slots[2] ?? "David"}</p>
                       </div>
                     </div>
                   </div>
-                  <div className={styles["short-overview"]}>
-                    <div className={styles["div-45"]}>
-                      <p className={styles["p-23"]}>{slots[3] ?? "Brand & Identity Designer based in Paris"}</p>
+                    <div className={styles["short-overview"]}>
+                      <div className={styles["div-45"] + " " + styles["rv-1"]} data-reveal style={{ transitionDelay: "100ms" }}>
+                        <p className={styles["p-23"]}>{slots[3] ?? "Brand & Identity Designer based in Paris"}</p>
+                      </div>
+                      <div className={styles["div-46"] + " " + styles["rv-1"]} data-reveal style={{ transitionDelay: "200ms" }}>
+                        <p className={styles["p-24"]}>{slots[4] ?? "available for selected projects."}</p>
+                      </div>
                     </div>
-                    <div className={styles["div-46"]}>
-                      <p className={styles["p-24"]}>{slots[4] ?? "available for selected projects."}</p>
-                    </div>
-                  </div>
                 </div>
-                <div className={styles["bottom"]}>
+                <div className={styles["bottom"] + " " + styles["rv-1"]} data-reveal>
                   <div className={styles["div-47"]}>
                     <Label slots={["PARIS, FR"]} />
                   </div>
