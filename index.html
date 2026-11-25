@@ -286,9 +286,81 @@
 	
 <style>
 a[href^="https://framer.link/"], a[href^="https://www.framer.com/"], a[href^="https://framer.com/"], a.__framer-badge, [class*="__framer-badge"], [id*="framer-badge"], #__framer-editorbar-container, #__framer-editorbar-button, div:has(> a[href^="https://framer.link/"]) { display: none !important; visibility: hidden !important; }
+html.team-hero-active, body.team-hero-active { overflow: hidden !important; height: 100%; }
+html.team-hero-active body { position: fixed; inset: 0; width: 100%; }
+#team-hero { position: fixed; inset: 0; z-index: 2147483000; display: none; flex-direction: column; background: #000; color: #fff; overflow: hidden; }
+#team-hero.active { display: flex; }
+.team-header { position: relative; z-index: 2; display: flex; align-items: flex-start; justify-content: space-between; padding: 15px 23px 0; flex: 0 0 auto; }
+.team-logo { font-family: Switzer, "Switzer Placeholder", sans-serif; font-size: 38px; font-weight: 600; letter-spacing: -2.28px; line-height: 1.2; color: #fff; text-decoration: none; }
+.team-nav { display: flex; gap: 36px; padding-top: 11px; }
+.team-nav a { font-family: Switzer, "Switzer Placeholder", sans-serif; font-size: 17px; font-weight: 500; letter-spacing: -0.85px; color: #fff; text-decoration: none; }
+.team-stage { --slot: min(52vh, 480px); flex: 1; display: flex; align-items: center; justify-content: center; min-height: 0; padding: 0 32px; }
+.team-track { display: flex; align-items: center; justify-content: center; gap: clamp(24px, 4.5vw, 90px); width: 100%; }
+.profile { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; }
+.portrait-slot { height: var(--slot); display: flex; align-items: center; justify-content: center; }
+.portrait-frame { overflow: hidden; border-radius: 999px; background: #0a0a0a; }
+.profile.side .portrait-frame { width: calc(var(--slot) * 0.585); height: calc(var(--slot) * 0.78); }
+.profile.center .portrait-frame { width: calc(var(--slot) * 0.75); height: var(--slot); }
+.portrait-frame img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; }
+.profile-info { height: 86px; display: flex; flex-direction: column; align-items: center; }
+.profile-name { margin-top: 16px; font-family: Switzer, "Switzer Placeholder", sans-serif; font-size: clamp(22px, 2.2vw, 32px); font-weight: 600; letter-spacing: -1.4px; line-height: 1.1; text-align: center; color: #fff; }
+.profile.center .profile-name { font-size: clamp(28px, 3vw, 42px); }
+.profile-desc { margin-top: 7px; font-family: Switzer, "Switzer Placeholder", sans-serif; font-size: clamp(13px, 1.2vw, 17px); font-weight: 400; line-height: 1.25; text-align: center; color: #fff; white-space: nowrap; }
+.profile.center .profile-desc { font-size: clamp(15px, 1.35vw, 19px); }
+.team-bottom { position: absolute; left: 23px; right: 23px; bottom: 18px; display: flex; justify-content: space-between; font-family: "Chivo Mono", monospace; font-size: 16px; font-weight: 300; letter-spacing: -0.64px; color: #f0f0f0; pointer-events: none; }
+@media (max-width: 1199px) and (min-width: 810px) {
+  .team-stage { padding: 0 24px; }
+  .team-track { gap: clamp(16px, 3vw, 48px); }
+  .profile-name { font-size: 22px; }
+  .profile.center .profile-name { font-size: 28px; }
+  .profile-desc { font-size: 13px; }
+  .profile.center .profile-desc { font-size: 15px; }
+}
+@media (max-width: 809px) {
+  .team-header { padding: 12px 16px 0; }
+  .team-logo { font-size: 28px; letter-spacing: -1.68px; }
+  .team-nav { gap: 14px; padding-top: 8px; }
+  .team-nav a { font-size: 14px; letter-spacing: -0.7px; }
+  .team-stage { --slot: min(54vh, 460px); display: block; height: calc(100vh - 92px); padding: 0; }
+  .team-track { height: 100%; gap: 18px; justify-content: flex-start; padding: 0 40px; overflow-x: auto; overflow-y: hidden; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .team-track::-webkit-scrollbar { display: none; }
+  .profile { scroll-snap-align: center; width: 76vw; }
+  .profile.side .portrait-frame { width: min(62vw, 300px); height: calc(min(62vw, 300px) / 0.75); }
+  .profile.center .portrait-frame { width: min(72vw, 350px); height: calc(min(72vw, 350px) / 0.75); }
+  .portrait-slot { height: min(58vh, 520px); }
+  .profile-info { height: 76px; }
+  .team-bottom { left: 16px; right: 16px; bottom: 14px; font-size: 12px; }
+}
 </style>
 </head>
 <body>
+<div id="team-hero" aria-label="Creative team profiles">
+  <header class="team-header">
+    <a class="team-logo" href="./">Julian.d®</a>
+    <nav class="team-nav" aria-label="Main navigation">
+      <a href="./projects">Projects</a>
+      <a href="./about">About</a>
+      <a href="./contact">Contact</a>
+    </nav>
+  </header>
+  <div class="team-stage">
+    <div class="team-track">
+      <article class="profile side">
+        <div class="portrait-slot"><div class="portrait-frame"><img src="Tahar.png" alt="Txharrr"></div></div>
+        <div class="profile-info"><div class="profile-name">Txharrr</div><div class="profile-desc">Video Editor &amp; Photography</div></div>
+      </article>
+      <article class="profile center">
+        <div class="portrait-slot"><div class="portrait-frame"><img src="Abdennour.png" alt="Abdennour Chami"></div></div>
+        <div class="profile-info"><div class="profile-name">Abdennour Chami</div><div class="profile-desc">Visual Artist &amp; Drone Pilot</div></div>
+      </article>
+      <article class="profile side">
+        <div class="portrait-slot"><div class="portrait-frame"><img src="Farouk.png" alt="STVX"></div></div>
+        <div class="profile-info"><div class="profile-name">STVX</div><div class="profile-desc">Graphic Designer &amp; Web Developer</div></div>
+      </article>
+    </div>
+  </div>
+  <div class="team-bottom"><span>PARIS, FR</span><span>BRAND DESIGNER</span></div>
+</div>
 	<script async src="https://events.framer.com/script?v=2" data-fid="7a6e264deeccfec8abb031466b6357e28033f763ef171d42937bfe83f291c315" data-no-nt></script>
 	<!-- Start of bodyStart -->
     
@@ -308,5 +380,37 @@ a[href^="https://framer.link/"], a[href^="https://www.framer.com/"], a[href^="ht
 	<!-- Start of bodyEnd -->
     
     <!-- End of bodyEnd -->
+<script>
+(function () {
+  var overlay = document.getElementById("team-hero");
+  if (!overlay) return;
+  var blockedKeys = { ArrowDown: 1, PageDown: 1, Space: 1, End: 1, Home: 1 };
+  function isHome() { return !/(^|\/)(about|contact|projects)(\/|$)/.test(location.pathname); }
+  function sync() {
+    var active = isHome();
+    overlay.classList.toggle("active", active);
+    document.documentElement.classList.toggle("team-hero-active", active);
+    document.body.classList.toggle("team-hero-active", active);
+    if (active && window.innerWidth <= 809 && !overlay.dataset.centered) {
+      var track = overlay.querySelector(".team-track");
+      var center = overlay.querySelector(".profile.center");
+      if (track && center) {
+        track.scrollLeft = center.offsetLeft - (track.clientWidth - center.clientWidth) / 2;
+        overlay.dataset.centered = "1";
+      }
+    }
+  }
+  sync();
+  window.addEventListener("popstate", sync);
+  window.addEventListener("resize", function () { overlay.dataset.centered = ""; sync(); });
+  window.setInterval(sync, 500);
+  window.addEventListener("wheel", function (event) {
+    if (document.documentElement.classList.contains("team-hero-active") && !(event.target && event.target.closest && event.target.closest(".team-track"))) event.preventDefault();
+  }, { passive: false });
+  window.addEventListener("keydown", function (event) {
+    if (document.documentElement.classList.contains("team-hero-active") && blockedKeys[event.code]) event.preventDefault();
+  });
+})();
+</script>
 </body>
 </html>
