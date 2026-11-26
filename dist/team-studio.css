@@ -1,5 +1,10 @@
 html.team-hero-active #main,
-html.team-hero-active #template-overlay {
+html.team-hero-active #template-overlay,
+html.project-active #main,
+html.project-active #template-overlay,
+html.project-active #team-hero,
+html.project-active #team-intro,
+html.project-active #team-footer {
   display: none !important;
 }
 
@@ -94,7 +99,7 @@ html.lenis body {
 }
 
 .team-stage {
-  --slot: min(44vh, 420px);
+  --slot: min(50vh, 480px);
   flex: 1;
   display: flex;
   align-items: center;
@@ -107,7 +112,7 @@ html.lenis body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  gap: clamp(64px, 9.5vw, 150px);
+  gap: clamp(48px, 8.5vw, 120px);
   width: 100%;
 }
 
@@ -117,6 +122,20 @@ html.lenis body {
   flex-direction: column;
   align-items: center;
   flex: 0 0 auto;
+}
+
+.profile-link {
+  position: relative;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.profile-link:focus-visible {
+  outline: 1px solid #fff;
+  outline-offset: 12px;
+  border-radius: 999px;
 }
 
 .portrait-slot {
@@ -152,12 +171,12 @@ html.lenis body {
 }
 
 .profile.side .portrait-frame {
-  width: calc(var(--slot) * 0.585);
-  height: calc(var(--slot) * 0.78);
+  width: calc(var(--slot) * 0.62);
+  height: calc(var(--slot) * 0.83);
 }
 
 .profile.center .portrait-frame {
-  width: calc(var(--slot) * 0.75);
+  width: calc(var(--slot) * 0.8);
   height: var(--slot);
 }
 
@@ -351,18 +370,173 @@ html.team-hero-active #team-footer {
   color: rgb(102, 102, 102);
 }
 
+#team-project {
+  display: none;
+  position: relative;
+  z-index: 20;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-bottom: 90px;
+  background: #000;
+  color: #fff;
+}
+
+html.project-active #team-project {
+  display: block;
+}
+
+.project-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 15px 23px 0;
+}
+
+.project-back {
+  display: inline-flex;
+  align-items: center;
+  padding-top: 11px;
+  font-family: "Chivo Mono", monospace;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: -0.64px;
+  color: #f0f0f0;
+  text-decoration: none;
+}
+
+.project-hero {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 90px 32px 70px;
+}
+
+.project-label {
+  font-family: "Chivo Mono", monospace;
+  font-size: 16px;
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: #f0f0f0;
+}
+
+.project-title {
+  font-family: "Neutral Sans Variable", sans-serif;
+  font-size: clamp(72px, 15vw, 240px);
+  font-weight: 1000;
+  font-variation-settings: "wght" 1000, "opsz" 28;
+  letter-spacing: -0.06em;
+  line-height: 0.8;
+  color: #fff;
+  mix-blend-mode: difference;
+}
+
+html.project-active .project-hero > *,
+html.project-active .project-section {
+  animation: project-enter 1s cubic-bezier(0.75, 0.25, 1, 1) both;
+}
+
+html.project-active .project-hero > :nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+html.project-active .project-section:nth-of-type(1) {
+  animation-delay: 0.2s;
+}
+
+html.project-active .project-section:nth-of-type(2) {
+  animation-delay: 0.3s;
+}
+
+@keyframes project-enter {
+  from {
+    opacity: 0.001;
+    transform: translate3d(0, 28px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.project-section {
+  display: flex;
+  flex-direction: column;
+  gap: 34px;
+  padding: 60px 32px 100px;
+}
+
+.project-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.project-section-title {
+  font-family: "Chivo Mono", monospace;
+  font-size: clamp(18px, 2.2vw, 28px);
+  font-weight: 300;
+  letter-spacing: -0.04em;
+  color: #fff;
+}
+
+.project-section-count {
+  font-family: "Chivo Mono", monospace;
+  font-size: 14px;
+  font-weight: 300;
+  color: #8f8f8f;
+}
+
+.project-video-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px;
+}
+
+.project-video-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+}
+
+.project-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+  background: #0a0a0a;
+}
+
+.project-video-name {
+  font-family: "Chivo Mono", monospace;
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: -0.03em;
+  color: #8f8f8f;
+}
+
+.project-empty {
+  font-family: "Chivo Mono", monospace;
+  font-size: 16px;
+  font-weight: 300;
+  color: #666;
+}
+
 @media (min-width: 810px) and (max-width: 1199.98px) {
   .team-nav {
     gap: 20px;
   }
 
   .team-stage {
-    --slot: min(42vh, 380px);
+    --slot: min(48vh, 430px);
     padding: 0 24px;
   }
 
   .team-track {
-    gap: clamp(48px, 10vw, 100px);
+    gap: clamp(40px, 8.5vw, 84px);
   }
 
   .name-layer {
@@ -392,6 +566,18 @@ html.team-hero-active #team-footer {
     font-size: 45px;
     line-height: 52px;
     letter-spacing: -1.1px;
+  }
+
+  .project-video-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project-hero {
+    padding: 70px 24px 60px;
+  }
+
+  .project-section {
+    padding: 50px 24px 80px;
   }
 }
 
@@ -426,8 +612,8 @@ html.team-hero-active #team-footer {
     height: 100%;
     align-items: flex-start;
     justify-content: flex-start;
-    gap: 24px;
-    padding: 0 40px;
+    gap: 18px;
+    padding: 0 32px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
@@ -440,17 +626,17 @@ html.team-hero-active #team-footer {
 
   .profile {
     scroll-snap-align: center;
-    width: 76vw;
+    width: 84vw;
   }
 
   .profile.side .portrait-frame {
-    width: min(62vw, 300px);
-    height: calc(min(62vw, 300px) / 0.75);
+    width: min(68vw, 330px);
+    height: calc(min(68vw, 330px) / 0.75);
   }
 
   .profile.center .portrait-frame {
-    width: min(72vw, 350px);
-    height: calc(min(72vw, 350px) / 0.75);
+    width: min(78vw, 380px);
+    height: calc(min(78vw, 380px) / 0.75);
   }
 
   .portrait-slot {
@@ -458,12 +644,12 @@ html.team-hero-active #team-footer {
   }
 
   .name-layer {
-    width: 76vw;
+    width: 84vw;
     bottom: -2%;
   }
 
   .profile.center .name-layer {
-    width: 80vw;
+    width: 88vw;
     bottom: -7%;
   }
 
@@ -499,5 +685,32 @@ html.team-hero-active #team-footer {
     font-size: 30px;
     line-height: 36px;
     letter-spacing: -0.1px;
+  }
+
+  .project-header {
+    padding: 12px 16px 0;
+  }
+
+  .project-back {
+    font-size: 14px;
+  }
+
+  .project-hero {
+    gap: 12px;
+    padding: 54px 20px 46px;
+  }
+
+  .project-title {
+    font-size: clamp(54px, 18vw, 90px);
+  }
+
+  .project-section {
+    gap: 24px;
+    padding: 44px 20px 70px;
+  }
+
+  .project-video-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 18px;
   }
 }

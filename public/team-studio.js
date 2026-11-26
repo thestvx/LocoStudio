@@ -1,17 +1,82 @@
 (function () {
   var INTRO_TEXT = "We are LocoStudio, a creative team bringing ideas to life through visual storytelling, design, and digital experiences. Combining different creative perspectives and technical skills, we build identities, create meaningful visuals, and develop experiences that leave a lasting impression.";
+  var PROJECTS = {
+    txharrr: {
+      title: "Txharrr",
+      sections: [
+        {
+          title: "[WEDDINGS]",
+          videos: [{ name: "02.mp4", id: "1sDTm3zlkz_Iyxr1ltlCaxqLiPFK2tU-I" }]
+        },
+        {
+          title: "[ADVERTISEMENTS]",
+          videos: [
+            { name: "naftiya.mp4", id: "17pd3Dn3K4r-Jud5BaRj_5-t9yaYvHRh3" },
+            { name: "Reels 03.mp4", id: "1sUByuzZ6jYzExyAVrBgdF28fM4Tk6_JR" }
+          ]
+        }
+      ]
+    },
+    abdennour: { title: "Abdennour Chami", sections: [] },
+    stvx: { title: "STVX", sections: [] }
+  };
   var overlay = document.getElementById("team-hero");
   var intro = document.getElementById("team-intro");
   if (!overlay || !intro) return;
 
   var wasHome = null;
+  var wasProject = false;
   var namesAnimated = false;
   var entranceAnimated = false;
   var introEntered = false;
   var splitDone = false;
 
   function isHome() {
-    return !/(^|\/)(about|contact|projects)(\/|$)/.test(location.pathname);
+    return !/(^|\/)(about|contact|projects|txharrr|abdennour|stvx)(\/|$)/.test(location.pathname);
+  }
+
+  function currentProjectSlug() {
+    var match = location.pathname.match(/(?:^|\/)(txharrr|abdennour|stvx)(?:\/|$)/i);
+    return match ? match[1].toLowerCase() : "";
+  }
+
+  function homeHref() {
+    var path = location.pathname.replace(/\/+$/, "");
+    var index = path.lastIndexOf("/");
+    return index > 0 ? path.slice(0, index + 1) : "/";
+  }
+
+  function escapeHtml(value) {
+    return String(value).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function buildProject(slug) {
+    var data = PROJECTS[slug];
+    var section = document.getElementById("team-project");
+    if (!data) return;
+    if (!section) {
+      section = document.createElement("section");
+      section.id = "team-project";
+      document.body.insertBefore(section, document.body.firstChild);
+    }
+    if (section.getAttribute("data-slug") === slug) return;
+    section.setAttribute("data-slug", slug);
+    document.title = data.title + " — LocoStudio";
+
+    var sectionsMarkup = "";
+    if (!data.sections.length) {
+      sectionsMarkup = '<section class="project-section"><div class="project-section-head"><h2 class="project-section-title">[COMING SOON]</h2></div><div class="project-empty">[COMING SOON]</div></section>';
+    } else {
+      data.sections.forEach(function (group) {
+        var videos = group.videos.map(function (video) {
+          var url = "https://drive.google.com/file/d/" + video.id + "/preview?usp=sharing";
+          return '<div class="project-video-card"><iframe class="project-video" src="' + url + '" title="' + escapeHtml(video.name) + '" allow="unload; autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen loading="lazy"></iframe><div class="project-video-name">' + escapeHtml(video.name) + "</div></div>";
+        }).join("");
+        sectionsMarkup += '<section class="project-section"><div class="project-section-head"><h2 class="project-section-title">' + escapeHtml(group.title) + '</h2><span class="project-section-count">' + String(group.videos.length).padStart(2, "0") + '</span></div><div class="project-video-grid">' + videos + "</div></section>";
+      });
+    }
+
+    section.innerHTML = '<header class="project-header"><a class="team-logo" href="' + homeHref() + '" aria-label="LocoStudio"><img src="locologo.png" alt="LocoStudio"></a><a class="project-back" href="' + homeHref() + '">[BACK]</a></header><div class="project-hero"><div class="project-label">[PROJECTS]</div><h1 class="project-title">' + escapeHtml(data.title) + "</h1></div>" + sectionsMarkup;
   }
 
   function spring(from, to, options, onUpdate, onDone) {
@@ -282,10 +347,21 @@
 
   function sync() {
     var active = isHome();
+    var projectSlug = currentProjectSlug();
+    var projectActive = !!projectSlug;
     overlay.classList.toggle("active", active);
     intro.classList.toggle("active", active);
     document.documentElement.classList.toggle("team-hero-active", active);
     document.body.classList.toggle("team-hero-active", active);
+    document.documentElement.classList.toggle("project-active", projectActive);
+    document.body.classList.toggle("project-active", projectActive);
+    if (projectActive) {
+      buildProject(projectSlug);
+      document.title = PROJECTS[projectSlug].title + " — LocoStudio";
+    } else if (wasProject) {
+      document.title = "LocoStudio — Creative Studio";
+    }
+    wasProject = projectActive;
     if (active !== wasHome) {
       if (active) {
         splitIntro();
